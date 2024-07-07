@@ -1,25 +1,11 @@
+-- von uns
+
 DROP DATABASE IF EXISTS Backpacker;
 CREATE DATABASE BACKPACKER;
 
 USE BACKPACKER;
 
--- phpMyAdmin SQL Dump
--- version 2.9.1.1
--- http://www.phpmyadmin.net
--- 
--- Host: localhost
--- Erstellungszeit: 09. März 2008 um 21:56
--- Server Version: 5.0.27
--- PHP-Version: 5.2.0
--- 
--- Datenbank: `backpacker_lb3`
--- 
-
--- --------------------------------------------------------
-
--- 
--- Tabellenstruktur für Tabelle `tbl_benutzer`
--- 
+-- gegeben
 
 CREATE TABLE `tbl_benutzer` (
   `Benutzer_ID` int(11) NOT NULL auto_increment,
@@ -34,12 +20,6 @@ CREATE TABLE `tbl_benutzer` (
   PRIMARY KEY  (`Benutzer_ID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='Mitarbeiter' AUTO_INCREMENT=28 ;
 
-
-
--- 
--- Tabellenstruktur für Tabelle `tbl_buchung`
--- 
-
 CREATE TABLE `tbl_buchung` (
   `Buchungs_ID` int(11) NOT NULL auto_increment,
   `Personen_FS` int(11) default NULL,
@@ -49,33 +29,16 @@ CREATE TABLE `tbl_buchung` (
   PRIMARY KEY  (`Buchungs_ID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='Buchungszeilen' AUTO_INCREMENT=1087 ;
 
-
-
--- 
--- Tabellenstruktur für Tabelle `tbl_land`
--- 
-
 CREATE TABLE `tbl_land` (
   `Land_ID` int(11) NOT NULL default '0',
   `Land` text collate latin1_general_ci NOT NULL
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='enthält die Ländercodes';
-
-
--- 
--- Tabellenstruktur für Tabelle `tbl_leistung`
--- 
 
 CREATE TABLE `tbl_leistung` (
   `LeistungID` int(11) NOT NULL default '0',
   `Beschreibung` varchar(70) collate latin1_general_ci default NULL,
   PRIMARY KEY  (`LeistungID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-
-
-
--- 
--- Tabellenstruktur für Tabelle `tbl_personen`
--- 
 
 CREATE TABLE `tbl_personen` (
   `Personen_ID` int(11) NOT NULL auto_increment,
@@ -92,10 +55,6 @@ CREATE TABLE `tbl_personen` (
   PRIMARY KEY  (`Personen_ID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='enth�lt alle G�ste' AUTO_INCREMENT=2042 ;
 
--- 
--- Tabellenstruktur für Tabelle `tbl_positionen`
--- 
-
 CREATE TABLE `tbl_positionen` (
   `Positions_ID` int(11) NOT NULL auto_increment,
   `Buchungs_FS` int(11) default NULL,
@@ -110,6 +69,12 @@ CREATE TABLE `tbl_positionen` (
   PRIMARY KEY  (`Positions_ID`),
   FULLTEXT KEY `Leistung_Text` (`Leistung_Text`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='enthält einzelne Buchungspositionen' AUTO_INCREMENT=4055 ;
+
+-- von uns
+
+CREATE USER `MgmtUsr1`@`%` IDENTIFIED BY 'M141Projekt';
+CREATE USER `Usr1`@`%` IDENTIFIED BY 'M141Projekt';
+CREATE USER `Adm`@`%` IDENTIFIED BY `M141ProjektAdm`
 
 CREATE ROLE `Benutzer`;
 GRANT SELECT ON `backpacker`.`tbl_land` TO `Benutzer`;
@@ -126,10 +91,46 @@ GRANT SELECT ON `backpacker`.`tbl_positionen` TO `Management`;
 GRANT SELECT ON `backpacker`.`tbl_buchung` TO `Management`;
 GRANT ALL PRIVILEGES ON `backpacker`.`tbl_benutzer` TO `Management`;
 
-CREATE USER `MgmtUsr1`@`%` IDENTIFIED BY 'M141Projekt';
-CREATE USER `Usr1`@`%` IDENTIFIED BY 'M141Projekt';
 
 GRANT `Management` TO `MgmtUsr1`@`%`;
 GRANT `Benutzer` TO `Usr1`@`%`;
+GRANT ALL PRIVILEGES ON *.* TO 'adm'@'%';
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'M141ProjektRoot';
 
 flush privileges;
+
+LOAD DATA INFILE 'C:/Daten/TBZ/Module/m141/unser_repo/M141-/scripts/data/backpacker_lb3_table_tbl_benutzer.csv'
+INTO TABLE tbl_benutzer
+FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+LOAD DATA INFILE 'C:/Daten/TBZ/Module/m141/unser_repo/M141-/scripts/data/backpacker_lb3_table_tbl_buchung.csv'
+INTO TABLE tbl_buchung
+FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+LOAD DATA INFILE 'C:/Daten/TBZ/Module/m141/unser_repo/M141-/scripts/data/backpacker_lb3_table_tbl_land.csv'
+INTO TABLE tbl_land
+FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+LOAD DATA INFILE 'C:/Daten/TBZ/Module/m141/unser_repo/M141-/scripts/data/backpacker_lb3_table_tbl_leistung.csv'
+INTO TABLE tbl_leistung
+FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+LOAD DATA INFILE 'C:/Daten/TBZ/Module/m141/unser_repo/M141-/scripts/data/backpacker_lb3_table_tbl_personen.csv'
+INTO TABLE tbl_personen
+FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
+
+LOAD DATA INFILE 'C:/Daten/TBZ/Module/m141/unser_repo/M141-/scripts/data/backpacker_lb3_table_tbl_positionen.csv'
+INTO TABLE tbl_positionen
+FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
