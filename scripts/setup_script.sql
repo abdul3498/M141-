@@ -53,6 +53,8 @@ CREATE TABLE `tbl_leistung` (
   PRIMARY KEY  (`LeistungID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
+
+
 CREATE TABLE `tbl_benutzer` (
   `Benutzer_ID` int(11) NOT NULL AUTO_INCREMENT,
   `Benutzername` varchar(20) collate latin1_general_ci NOT NULL default '',
@@ -87,23 +89,26 @@ CREATE TABLE `tbl_positionen` (
   INDEX `idx_leistung_fs` (`Leistung_FS`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='enthält einzelne Buchungspositionen' AUTO_INCREMENT=4055 ;
 
-ALTER TABLE `tbl_positionen` 
-ADD CONSTRAINT `fk_buchungs_fs`
-  FOREIGN KEY (`Buchungs_FS`) REFERENCES `tbl_buchung`(`Buchungs_ID`) ON DELETE CASCADE,
-ADD CONSTRAINT `fk_benutzer_fs`
-  FOREIGN KEY (`Benutzer_FS`) REFERENCES `tbl_benutzer`(`Benutzer_ID`) ON DELETE SET NULL,
-ADD CONSTRAINT `fk_leistung_fs`
-  FOREIGN KEY (`Leistung_FS`) REFERENCES `tbl_leistung`(`LeistungID`) ON DELETE SET NULL;
+ALTER TABLE `tbl_positionen` ADD CONSTRAINT `fk_buchungs_fs` FOREIGN KEY (`Buchungs_FS`) REFERENCES `tbl_buchung`(`Buchungs_ID`) ON DELETE CASCADE;
+ALTER TABLE `tbl_positionen` ADD CONSTRAINT `fk_leistung_fs` FOREIGN KEY (`Leistung_FS`) REFERENCES `tbl_leistung`(`LeistungID`) ON DELETE SET NULL;
 
 
 -- von uns
+drop view if exists view_tbl_benutzer_Password;
+drop view if exists view_tbl_benutzer_deaktiviert;
+drop view if exists view_tbl_benutzer_restliche_attribute;
+
+create view view_tbl_benutzer_Password as select Password from tbl_benutzer;
+create view view_tbl_benutzer_deaktiviert as select deaktiviert from tbl_benutzer;
+create view view_tbl_benutzer_restliche_attribute as select Benutzer_ID, Benutzername, Vorname, Name, Benutzergruppe, erfasst, aktiv from tbl_benutzer;
 
 DROP USER IF EXISTS `MgmtUsr1`@`%`;
 DROP USER IF EXISTS `Usr1`@`%`;
 DROP USER IF EXISTS `Adm`@`%`;
+
 CREATE USER `MgmtUsr1`@`%` IDENTIFIED BY 'M141Projekt';
 CREATE USER `Usr1`@`%` IDENTIFIED BY 'M141Projekt';
-CREATE USER `Adm`@`%` IDENTIFIED BY 'M141ProjektAdm'
+CREATE USER `Adm`@`%` IDENTIFIED BY 'M141ProjektAdm';
 
 DROP ROLE IF EXISTS `role_benutzer`;
 CREATE ROLE `role_benutzer`;
@@ -112,6 +117,9 @@ GRANT SELECT ON `backpacker`.`tbl_leistung` TO `role_benutzer`;
 GRANT SELECT, UPDATE ON `backpacker`.`tbl_personen` TO `role_benutzer`;
 GRANT ALL PRIVILEGES ON `backpacker`.`tbl_buchung` TO `role_benutzer`;
 GRANT ALL PRIVILEGES ON `backpacker`.`tbl_positionen` TO `role_benutzer`;
+grant select on view_tbl_benutzer_deaktiviert to `role_benutzer`;
+grant select, insert, update on view_tbl_benutzer_restliche_attribute to `role_benutzer`;
+
 
 drop role if exists `Management`;
 CREATE ROLE `Management`;
