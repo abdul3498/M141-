@@ -127,10 +127,10 @@ Wir entschieden uns für die db.t5.micro, da unsere Datenbank kein Corporate Lev
 
 | Tag  | Aufgabe                                                      | Verantwortlich |
 |------|--------------------------------------------------------------|----------------|
-| 1-2  | Definition der Infrastruktur und Anforderungen               | Zahid          |
-| 3-4  | Setup des lokalen DBMS und Import der Daten                  | Ilja           |
+| 1-2  | Definition der Infrastruktur und Anforderungen               | Zahid, Ilja    |
+| 3-4  | Setup des lokalen DBMS und Import der Daten                  | Zahid, Ilja    |
 | 5-6  | Datenbereinigung und Konsolidierung                          | Ilja           |
-| 7    | Umsetzung Zugriffsberechtigungen                             | Ilja           |
+| 7    | Umsetzung Zugriffsberechtigungen                             | Zahid, Ilja    |
 | 8-9  | Testen der Datenkonsistenz und Optimierung                   | Ilja           |
 | 10   | Migration auf Cloud-DBMS                                     | Ilja           |
 | 11   | Testen der Cloud-Datenbank                                   | Ilja           |
@@ -138,6 +138,7 @@ Wir entschieden uns für die db.t5.micro, da unsere Datenbank kein Corporate Lev
 
 ## Umsetzung
 
+Eine Anleitung finden sie [hier](./anleitung.md)
 
 ### Local Setup
 
@@ -232,6 +233,6 @@ In jeder Datenbank ist es wichtig, die Integrität der Daten zu wahren und Dupli
 | 4       | 2024-07-04  | Testen der Berechtigungen (CRUD-Operationen)                        | Benutzer können nur ihre erlaubten Aktionen durchführen | Benutzer können nur ihre erlaubten Aktionen durchführen | Ja                     | `INSERT INTO tbl_personen VALUES ...`|
 | 5       | 2024-07-05  | Überprüfung der Datenmigration auf die Cloud-DBMS                   | Alle Daten wurden korrekt migriert                 | Alle Daten wurden korrekt migriert                 | Ja                     | `SELECT COUNT(*) FROM tbl_personen;` |
 | 6       | 2024-07-06  | Überprüfung auf Duplikate                                           | Keine Duplikate vorhanden                          | Keine Duplikate vorhanden                          | Ja                     | `SELECT Benutzer_ID, COUNT(*) AS duplicate_count FROM tbl_benutzer GROUP BY Benutzer_ID HAVING COUNT(*) > 1;` |
-| 7       | 2024-07-07  | Testen der Zugänglichkeit des SQL-Servers im Web                    | Zugriff auf den SQL-Server über das Web möglich    | Zugriff auf den SQL-Server über das Web möglich    | Offen                  | Browser oder SQL Client Zugriff      |
+| 7       | 2024-07-07  | Testen der Zugänglichkeit des SQL-Servers im Web                    | Zugriff auf den SQL-Server über das Web möglich    | Zugriff auf den SQL-Server über das Web möglich    | Ja                  | SQL Client Zugriff      |
 
 
