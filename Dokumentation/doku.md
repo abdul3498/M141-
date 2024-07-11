@@ -128,13 +128,13 @@ Wir entschieden uns für die db.t5.micro, da unsere Datenbank kein Corporate Lev
 | Tag  | Aufgabe                                                      | Verantwortlich |
 |------|--------------------------------------------------------------|----------------|
 | 1-2  | Definition der Infrastruktur und Anforderungen               | Zahid          |
-| 3-4  | Setup des lokalen DBMS und Import der Daten                  | Ilja          |
-| 5-6  | Datenbereinigung und Konsolidierung                          | Ilja          |
-| 7    | Umsetzung Zugriffsberechtigungen     | Ilja          |
-| 8-9  | Testen der Datenkonsistenz und Optimierung                   | Ilja          |
-| 10   | Migration auf Cloud-DBMS                                      | Ilja          |
-| 11   | Testen der Cloud-Datenbank                                    | Ilja          |
-| 12   | Erstellung der Dokumentation und Testprotokolle              | Zahid, Ilja          |
+| 3-4  | Setup des lokalen DBMS und Import der Daten                  | Ilja           |
+| 5-6  | Datenbereinigung und Konsolidierung                          | Ilja           |
+| 7    | Umsetzung Zugriffsberechtigungen                             | Ilja           |
+| 8-9  | Testen der Datenkonsistenz und Optimierung                   | Ilja           |
+| 10   | Migration auf Cloud-DBMS                                     | Ilja           |
+| 11   | Testen der Cloud-Datenbank                                   | Ilja           |
+| 12   | Erstellung der Dokumentation und Testprotokolle              | Zahid, Ilja    |
 
 ## Umsetzung
 
