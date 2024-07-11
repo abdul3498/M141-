@@ -188,40 +188,6 @@ wait_timeout reduziert auf 4 std
 
 max_connections auf 5 gesetzt 
 
-### Skript zur Identifizierung von Duplikaten
-In jeder Datenbank ist es wichtig, die Integrität der Daten zu wahren und Duplikate zu vermeiden. Das folgende Skript wird verwendet, um mehrfach vorkommende Einträge in verschiedenen Tabellen zu identifizieren. Es gruppiert die Daten nach ihren einzigartigen IDs und zählt, wie oft jede ID erscheint. Einträge, die mehr als einmal erscheinen, werden als Duplikate betrachtet.
-
-        ```sql
-        SELECT Benutzer_ID, COUNT(*) AS duplicate_count
-        FROM tbl_benutzer
-        GROUP BY Benutzer_ID
-        HAVING COUNT(*) > 1;
-
-        SELECT Buchungs_ID, COUNT(*) AS duplicate_count
-        FROM tbl_buchung
-        GROUP BY Buchungs_ID
-        HAVING COUNT(*) > 1;
-
-        SELECT Land_ID, COUNT(*) AS duplicate_count
-        FROM tbl_land
-        GROUP BY Land_ID
-        HAVING COUNT(*) > 1;
-
-        SELECT LeistungID, COUNT(*) AS duplicate_count
-        FROM tbl_leistung
-        GROUP BY LeistungID
-        HAVING COUNT(*) > 1;
-
-        SELECT Positions_ID, COUNT(*) AS duplicate_count
-        FROM tbl_positionen
-        GROUP BY Positions_ID
-        HAVING COUNT(*) > 1;
-
-
-### Testing
-
-
-
 
 ## Testprotokol
 
