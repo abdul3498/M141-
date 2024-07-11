@@ -217,12 +217,6 @@ In jeder Datenbank ist es wichtig, die Integrität der Daten zu wahren und Dupli
         GROUP BY Positions_ID
         HAVING COUNT(*) > 1;
 
-
-### Testing
-
-
-
-
 ## Testprotokol
 
 | Test ID | Datum       | Beschreibung des Tests                                              | Erwartetes Ergebnis                                 | Erhaltenes Ergebnis                                | Funktioniert (Ja/Nein) | Wie wurde getestet (Command)         |
