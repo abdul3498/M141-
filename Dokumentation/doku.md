@@ -218,9 +218,6 @@ In jeder Datenbank ist es wichtig, die Integrität der Daten zu wahren und Dupli
         HAVING COUNT(*) > 1;
 
 
-### Testing
-
-
 
 
 ## Testprotokol
